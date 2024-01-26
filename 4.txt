@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int transition(int state, char ch) {
+    switch(state) {
+        case 0:
+            return (ch == '0') ? 1 : 2;
+        case 1:
+            return (ch == '0') ? 0 : 3;
+        case 2:
+            return (ch == '0') ? 3 : 0;
+        case 3:
+            return (ch == '0') ? 2 : 1;
+        default:
+            return -1;
+    }
+}
+
+bool is_even0_even1(string s) {
+    int current_state = 0;
+    for (char c : s) {
+        current_state = transition(current_state, c);
+        if (current_state == -1) return false;
+    }
+
+    return current_state == 0;
+
+}
+
+int32_t main() {
+
+    cout << "Enter a string: ";
+    string str; cin >> str;
+
+    is_even0_even1(str) ? cout << "String is accepted\n" : cout << "String is not accepted\n";
+
+    return 0;
+
+}
